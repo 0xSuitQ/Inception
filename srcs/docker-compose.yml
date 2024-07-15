@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  mariadb:
+    mem_limit: 2048m
+    image: mariadb:10
+    restart: always
+    ports:
+      - 3306:3306
+    env_file: .env
+    environment:
+      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
+      MYSQL_DATABASE: '${MYSQL_DATABASE}'
+      MYSQL_USER: '${MYSQL_USER}'
+      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
+    volume:
+      - db-data:/var/lib/mysql
+    networks:
+      - wordpress-network
+
+  wordpress:
+
+volumes:
+  db-data:
+
+networks:
+  wordpress-network:
+    driver: bridge
