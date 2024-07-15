@@ -20,12 +20,12 @@ server {
 	root /var/www/html;
 	index index.html;
 
-	# location ~ [^/]\\.php(/|$) {
-	# try_files $uri $uri/ =404;
-	# fastcgi_pass wordpress:9000;
-	# include fastcgi_params;
-	# fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
-	# }
+	location ~ [^/]\\.php(/|$) {
+	try_files $uri $uri/ =404;
+	fastcgi_pass wordpress:9000;
+	include fastcgi_params;
+	fastcgi_param SCRIPT_FILENAME \$document_root\$fastcgi_script_name;
+	}
 }" > /etc/nginx/sites-available/default
 
 nginx -g "daemon off;"

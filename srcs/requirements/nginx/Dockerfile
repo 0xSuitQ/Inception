@@ -8,7 +8,7 @@ COPY ./index.html /var/www/html
 
 # COPY ./conf/default /etc/nginx/sites-available
 
-COPY ./tools/script.sh /
+COPY ./utils/script.sh /
 
 RUN chmod +x /script.sh
 

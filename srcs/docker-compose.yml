@@ -2,27 +2,54 @@ version: '3.9'
 
 services:
   mariadb:
-    mem_limit: 2048m
-    image: mariadb:10
+    build: ./requirements/mariadb
     restart: always
     ports:
       - 3306:3306
     env_file: .env
-    environment:
-      MYSQL_ROOT_PASSWORD: '${MYSQL_ROOT_PASSWORD}'
-      MYSQL_DATABASE: '${MYSQL_DATABASE}'
-      MYSQL_USER: '${MYSQL_USER}'
-      MYSQL_PASSWORD: '${MYSQL_PASSWORD}'
-    volume:
+    volumes:
       - db-data:/var/lib/mysql
     networks:
-      - wordpress-network
+      - my-network
 
   wordpress:
+    depends_on:
+      - mariadb
+    build: ./requirements/wordpress
+    restart: always
+    env_file: .env
+    volumes:
+      - wordpress-data:/var/www/html
+    networks:
+      - my-network
+    
+  nginx:
+    depends_on:
+      - wordpress
+    build: ./requirements/nginx
+    restart: always
+    ports:
+      - 443:443
+    env_file: .env
+    volumes:
+    - wordpress-data:/var/www/html
+    networks:
+      - my-network
 
 volumes:
   db-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/nandroso/Inception/srcs/mariadb
+      o: bind
+  wordpress-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/nandroso/Inception/srcs/wordpress
+      o: bind
 
 networks:
-  wordpress-network:
+  my-network:
     driver: bridge
