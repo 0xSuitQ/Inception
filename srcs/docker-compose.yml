@@ -4,8 +4,6 @@ services:
   mariadb:
     build: ./requirements/mariadb
     restart: always
-    ports:
-      - 3306:3306
     env_file: .env
     volumes:
       - db-data:/var/lib/mysql
