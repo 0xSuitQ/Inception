@@ -20,6 +20,10 @@ server {
 	index index.php;
     root /var/www/html;
 
+	location / {
+        try_files \$uri \$uri/ /index.php?\$args;
+    }
+
 	location ~ [^/]\.php(/|$) {
         fastcgi_pass wordpress:9000;
         fastcgi_index index.php;

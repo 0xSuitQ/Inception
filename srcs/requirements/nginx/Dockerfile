@@ -4,8 +4,6 @@ RUN apt update -y && \
 	apt install -y nginx \
 	&& apt install -y openssl
 
-COPY ./index.html /var/www/html
-
 # COPY ./conf/default /etc/nginx/sites-available
 
 COPY ./utils/script.sh /
