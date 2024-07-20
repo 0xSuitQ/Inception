@@ -7,9 +7,9 @@ RUN apt update -y && \
 # && chown -R mysql:mysql /var/run/mysqld \
 # && chmod 777 /var/run/mysqld
 
-COPY ./utils/50-server.cnf /etc/mysql/mariadb.conf.d/
+COPY ./tools/50-server.cnf /etc/mysql/mariadb.conf.d/
 
-COPY ./utils/script.sh /
+COPY ./tools/script.sh /
 
 RUN chmod +x /script.sh
 

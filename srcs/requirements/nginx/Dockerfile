@@ -6,7 +6,7 @@ RUN apt update -y && \
 
 # COPY ./conf/default /etc/nginx/sites-available
 
-COPY ./utils/script.sh /
+COPY ./tools/script.sh /
 
 RUN chmod +x /script.sh
 

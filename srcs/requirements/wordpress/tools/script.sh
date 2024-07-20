@@ -15,7 +15,7 @@ else
     wp core download --allow-root
 
     mv /var/www/html/wp-config-sample.php /var/www/html/wp-config.php
-    # mv /wp-config.php /var/www/html/wp-config.php
+    mv /wp-config.php /var/www/html/wp-config.php
 
     awk -v db="$MYSQL_DB" '/DB_NAME/ {$0="define( '\''DB_NAME'\'', '\''" db "'\'' );"}1' wp-config.php > tmp && mv tmp wp-config.php
     awk -v usr="$MYSQL_USR" '/DB_USER/ {$0="define( '\''DB_USER'\'', '\''" usr "'\'' );"}1' wp-config.php > tmp && mv tmp wp-config.php
